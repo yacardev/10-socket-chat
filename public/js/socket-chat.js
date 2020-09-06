@@ -14,7 +14,8 @@ var user = {
 socket.on('connect', function() {
     console.log('Conectado al servidor');
     socket.emit('chatEntry', user, function(resp) {
-        console.log('Users: ', resp);
+        //console.log('Users: ', resp);
+        usersRender(resp);
     });
 });
 
@@ -37,14 +38,16 @@ socket.on('disconnect', function() {
 // Escuchar información
 socket.on('createMsg', function(msg) {
 
-    console.log('Servidor:', msg);
+    //console.log('Servidor:', msg);
+    msgRender(msg, false);
+    scrollBottom()
 
 });
 
 // Escuchar entrada/salida chat
-socket.on('usersList', function(msg) {
-
-    console.log(msg);
+socket.on('usersList', function(resp) {
+    usersRender(resp);
+    //console.log(msg);
 
 });
 
